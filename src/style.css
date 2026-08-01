@@ -71,14 +71,45 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Mobile view par extra space fix karne ke liye */
+/* Mobile view par DP aur fonts ko bada karne ke liye */
 @media (max-width: 768px) {
-  /* Apne hero section ya main container ki class/id yahan match ho jayegi */
-  section, .hero, .home, header {
+  /* Apne hero section ya main container ki class/id yahan use karna, jaise .hero, .home, etc. */
+  .hero {
     min-height: auto !important;
     height: auto !important;
-    padding-top: 30px !important;
-    padding-bottom: 30px !important;
+    padding-top: 40px !important; /* Thodi aur jagah denge upar */
+    padding-bottom: 40px !important;
     justify-content: flex-start !important;
+    text-align: center;
+  }
+
+  /* 1. Profile Picture Badi Karein */
+  /* Aapko apne image tag ki class/id yahan use karni hogi, jaise .profile-img */
+  .hero img.rounded-full, /* Replace with your actual DP class/id */
+  .hero .profile-pic-container img {
+    width: 200px !important; /* Pehle se badi (approx 150-160px thi) */
+    height: 200px !important;
+    margin-bottom: 25px !important;
+  }
+
+  /* 2. Main Heading Badi Karein ("Hi, I'm Umesh Thakur") */
+  .hero h1 {
+    font-size: 38px !important; /* Pehle se zyada bada */
+    line-height: 1.2 !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* 3. Bio Text Bada Karein */
+  .hero p {
+    font-size: 19px !important; /* Pehle se zyada readable */
+    line-height: 1.6 !important;
+    margin-bottom: 30px !important;
+  }
+
+  /* 4. Button Bada Karein ("View My Work") */
+  .hero .btn,
+  .hero button {
+    font-size: 18px !important;
+    padding: 16px 36px !important;
   }
 }
