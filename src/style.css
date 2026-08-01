@@ -3,6 +3,17 @@ body {
     scroll-behavior: smooth;
 }
 
+/* Navbar ke niche sections ko chipakne se rokne ke liye */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px; /* Navbar ki height ke hisab se gap maintain karega */
+}
+
+/* Sabhi sections ke liye scroll margin */
+section {
+  scroll-margin-top: 85px;
+}
+
 .glass {
     background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(10px);
@@ -68,10 +79,6 @@ body {
     background-color: #F3F4F6;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 /* Mobile view par extra space khatam karne aur compact karne ke liye */
 @media (max-width: 768px) {
 
@@ -88,8 +95,8 @@ html {
   .hero {
     min-height: unset !important;
     height: auto !important;
-    padding-top: 15px !important;    /* Upar ka gap ekdam kam kar diya */
-    padding-bottom: 20px !important; /* Niche ka gap bhi kam kar diya */
+    padding-top: 15px !important;    
+    padding-bottom: 20px !important; 
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
