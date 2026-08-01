@@ -260,16 +260,17 @@ function App() {
           </button>
         </div>
 
-        <div className={`${isMobileMenuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full bg-[#0F172A] border-b border-gray-800 flex-col p-6 space-y-4 md:hidden shadow-xl transition-all`}>
-          <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-700 pb-2">Home</a>
-          <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-700 pb-2">About</a>
-          <a href="#education-section" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-700 pb-2">Education</a>
-          <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-700 pb-2">Projects</a>
-          <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-700 pb-2">Contact</a>
-          <div className="flex items-center justify-between border-b border-gray-700 pb-2">
-            <a href={activeResumeLink} target="_blank" rel="noreferrer" className="hover:text-[#2563EB] text-lg">Resume</a>
+        {/* MOBILE MENU DROPDOWN FIX: Proper spacing and padding */}
+        <div className={`${isMobileMenuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full bg-[#0F172A] border-b border-gray-800 flex-col p-6 space-y-4 md:hidden shadow-2xl transition-all z-50`}>
+          <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-800 pb-3">Home</a>
+          <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-800 pb-3">About</a>
+          <a href="#education-section" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-800 pb-3">Education</a>
+          <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-800 pb-3">Projects</a>
+          <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg border-b border-gray-800 pb-3">Contact</a>
+          <div className="flex items-center justify-between pt-1">
+            <a href={activeResumeLink} target="_blank" rel="noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-lg">Resume PDF</a>
             {isAdminLoggedIn && (
-              <button onClick={() => setIsResumeModalOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-xs font-semibold">
+              <button onClick={() => { setIsMobileMenuOpen(false); setIsResumeModalOpen(true); }} className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-xs font-semibold">
                 Edit Resume
               </button>
             )}
@@ -374,14 +375,33 @@ function App() {
         </div>
       )}
 
-      {/* HERO SECTION */}
-      <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-24 pb-12">
-        <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full mb-6 border-4 border-[#2563EB] overflow-hidden shadow-2xl flex items-center justify-center bg-white">
+      {/* HERO SECTION FIX: Enhanced padding, glowing accents, and badges to make it feel full and attractive on mobile */}
+      <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-32 pb-16 relative overflow-hidden">
+        {/* Background ambient lighting element */}
+        <div className="absolute w-72 h-72 bg-blue-600/10 rounded-full blur-3xl -top-10 -z-10 pointer-events-none"></div>
+
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm mb-6 animate-pulse">
+          <i className="fas fa-circle text-[8px]"></i> Available for Opportunities
+        </div>
+
+        <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full mb-6 border-4 border-[#2563EB] overflow-hidden shadow-2xl flex items-center justify-center bg-white relative">
           <img src="/Profile Picture.jpeg" alt="Umesh Thakur" className="min-w-[155%] min-h-[155%] object-cover" style={{ objectPosition: 'center 20%' }} />
         </div>
-        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4">Hi, I'm <span className="text-[#2563EB]">Umesh Thakur</span></h1>
-        <p className="text-base sm:text-xl text-gray-400 mb-8 max-w-xl sm:max-w-2xl hero-subtext px-2">Transforming raw data into intelligent insights using Python, SQL, and AI.</p>
-        <a href="#projects" className="bg-[#2563EB] hover:bg-blue-700 text-white px-6 sm:px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg">View My Work</a>
+        
+        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 tracking-tight">Hi, I'm <span className="text-[#2563EB]">Umesh Thakur</span></h1>
+        
+        <p className="text-base sm:text-xl text-gray-400 mb-8 max-w-xl sm:max-w-2xl hero-subtext px-2 leading-relaxed">
+          Transforming raw data into intelligent insights using Python, SQL, and modern AI tools.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center px-6">
+          <a href="#projects" className="bg-[#2563EB] hover:bg-blue-700 text-white px-8 py-3.5 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
+            <i className="fas fa-code text-xs"></i> View My Work
+          </a>
+          <a href="#contact" className="bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-200 px-8 py-3.5 rounded-xl font-semibold transition-all flex items-center justify-center gap-2">
+            <i className="fas fa-paper-plane text-xs"></i> Let's Talk
+          </a>
+        </div>
       </section>
 
       {/* ABOUT SECTION */}
