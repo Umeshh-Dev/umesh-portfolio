@@ -374,7 +374,7 @@ function App() {
         </div>
       )}
 
-      {/* HERO SECTION - 1st Image Layout */}
+      {/* HERO SECTION */}
       <section id="home" className="hero min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-28 sm:pt-36 pb-12">
         <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full mb-6 border-4 border-[#2563EB] overflow-hidden shadow-2xl flex items-center justify-center bg-white">
           <img src="/Profile Picture.jpeg" alt="Umesh Thakur" className="min-w-[155%] min-h-[155%] object-cover" style={{ objectPosition: 'center 20%' }} />

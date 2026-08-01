@@ -6,11 +6,7 @@ body {
 /* Navbar ke niche sections ko chupne se rokne ke liye proper offset */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 95px; 
-}
-
-section {
-  scroll-margin-top: 95px; 
+  scroll-padding-top: 90px; 
 }
 
 .glass {
