@@ -67,51 +67,56 @@ body {
 .light-theme .skills-bg {
     background-color: #F3F4F6;
 }
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Mobile view par logo, DP aur positioning fix karne ke liye */
+/* Mobile view par logo, DP aur spacing fix karne ke liye */
 @media (max-width: 768px) {
 
   /* 1. Logo ko Bada Karein (Top Left) */
-  /* Aapke logo ke text/element ki class/id yahan use karein. Main ".header .logo" example ke liye use kar raha hoon. */
-  .header .logo,
-  .navbar-brand {
-      font-size: 24px !important; /* Logo text ko bada karne ke liye */
+  header a, nav a, .header .logo, .navbar-brand, nav span, header span {
+    font-size: 26px !important;
+  }
+  
+  header img, nav img {
+    max-height: 40px !important;
   }
 
-  /* 2. Hero Section ko Adjust Karein (DP upar karne ke liye) */
+  /* 2. Hero Section ko Adjust Karein */
   .hero {
     min-height: auto !important;
     height: auto !important;
-    padding-top: 70px !important; /* Yeh value kam ki hai taaki DP aur Upar aaye */
-    padding-bottom: 40px !important;
+    padding-top: 50px !important;
+    padding-bottom: 30px !important;
     justify-content: flex-start !important;
     text-align: center;
   }
 
-  /* 3. Profile Picture Badi Karein */
-  /* Apne image tag ki class/id yahan use karein, jaise .profile-img */
+  /* 3. Profile Picture ko Bada Karein (210px) */
   .hero img.rounded-full,
-  .hero .profile-pic-container img {
-    width: 190px !important;  /* DP ko pehle se bada kiya (190px) */
-    height: 190px !important;
-    margin-bottom: 20px !important;
+  .hero .profile-pic-container img,
+  .hero img {
+    width: 210px !important;  
+    height: 210px !important;
+    margin-top: 5px !important;
+    margin-bottom: 15px !important;
   }
 
-  /* 4. Text Sizes ko Re-balance Karein (Badi DP ke hisab se) */
+  /* 4. Text Sizes ko Re-balance Karein */
   .hero h1 {
-    font-size: 34px !important; /* Heading thodi aur badi */
-    margin-bottom: 10px !important;
+    font-size: 32px !important;
+    margin-bottom: 8px !important;
   }
 
   .hero p {
-    font-size: 17px !important; /* Bio text thoda aur bada */
-    margin-bottom: 20px !important;
+    font-size: 16px !important;
+    margin-bottom: 15px !important;
   }
 
   .hero .btn {
-    font-size: 17px !important;
+    font-size: 16px !important;
+    padding: 12px 28px !important;
   }
 }
