@@ -374,9 +374,9 @@ function App() {
         </div>
       )}
 
-      {/* HERO SECTION (Text overlap fix applied with pt-28 sm:pt-36) */}
-      <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-28 sm:pt-36 pb-12">
-        <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full mb-6 border-4 border-[#2563EB] overflow-hidden shadow-2xl flex items-center justify-center bg-white">
+      {/* HERO SECTION */}
+      <section id="home" className="hero min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-20 sm:pt-28 pb-12">
+        <div className="w-44 h-44 sm:w-48 sm:h-48 rounded-full mb-6 border-4 border-[#2563EB] overflow-hidden shadow-2xl flex items-center justify-center bg-white">
           <img src="/Profile Picture.jpeg" alt="Umesh Thakur" className="min-w-[155%] min-h-[155%] object-cover" style={{ objectPosition: 'center 20%' }} />
         </div>
         <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4">Hi, I'm <span className="text-[#2563EB]">Umesh Thakur</span></h1>
@@ -385,8 +385,8 @@ function App() {
       </section>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="py-16 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center">About Me</h2>
+      <section className="py-16 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+        <h2 id="about" className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center">About Me</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="text-gray-400 leading-relaxed text-base sm:text-lg content-text space-y-4">
             <p>I have completed my college and currently equipped with hands-on knowledge of Python, SQL, NumPy, Pandas, and Business Intelligence tools.</p>
@@ -407,8 +407,8 @@ function App() {
       </section>
 
       {/* EDUCATION SECTION */}
-      <section id="education-section" className="py-16 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
-        <div className="text-center mb-10 sm:mb-12">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div id="education-section" className="text-center mb-10 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">Education & Credentials</h2>
           {isAdminLoggedIn && (
             <button onClick={() => setIsEduModalOpen(true)} className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg inline-flex items-center gap-2 mt-2">
@@ -476,8 +476,8 @@ function App() {
       </section>
 
       {/* PROJECTS SECTION */}
-      <section id="projects" className="py-16 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
-        <div className="text-center mb-10 sm:mb-12">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+        <div id="projects" className="text-center mb-10 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">Projects</h2>
           {isAdminLoggedIn && (
             <button onClick={() => setIsAddModalOpen(true)} className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg inline-flex items-center gap-2 mt-2">
@@ -526,8 +526,8 @@ function App() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 max-w-4xl mx-auto text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-6">Get In Touch</h2>
+      <section className="py-16 sm:py-20 px-4 sm:px-6 max-w-4xl mx-auto text-center">
+        <h2 id="contact" className="text-2xl sm:text-3xl font-bold mb-6">Get In Touch</h2>
         <p className="text-gray-400 mb-8 sm:mb-10 contact-desc text-sm sm:text-base">Have a project in mind? Let's talk.</p>
         <form onSubmit={handleContactSubmit} className="space-y-4 sm:space-y-6">
           <input type="text" name="name" placeholder="Name" required className="w-full p-3 sm:p-4 rounded-lg bg-gray-800 border border-gray-700 text-white text-sm sm:text-base" />

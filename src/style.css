@@ -6,11 +6,11 @@ body {
 /* Navbar ke niche sections ko chupne se rokne ke liye proper offset */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 110px; 
+  scroll-padding-top: 95px; 
 }
 
 section {
-  scroll-margin-top: 110px; 
+  scroll-margin-top: 95px; 
 }
 
 .glass {
@@ -80,8 +80,6 @@ section {
 
 /* Mobile view optimization */
 @media (max-width: 768px) {
-
-  /* 1. Logo Bada Karein */
   header a, nav a, .header .logo, .navbar-brand, nav span, header span {
     font-size: 26px !important;
   }
@@ -90,46 +88,15 @@ section {
     max-height: 40px !important;
   }
 
-  /* 2. Hero Section ko Balanced aur Bhara-bhara banane ke liye */
   .hero {
-    min-height: 75vh !important; /* Mobile par khalipan hatane ke liye proper height */
+    min-height: 80vh !important;
     height: auto !important;
-    padding-top: 30px !important;    
-    padding-bottom: 30px !important; 
+    padding-top: 20px !important;    
+    padding-bottom: 20px !important; 
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important; /* Content ko vertically center karega taaki khali na lage */
+    justify-content: center !important;
     align-items: center !important;
     text-align: center;
-  }
-
-  /* 3. Profile Picture Size & Spacing */
-  .hero img.rounded-full,
-  .hero .profile-pic-container img,
-  .hero img {
-    width: 180px !important;  
-    height: 180px !important;
-    margin-top: 0px !important;
-    margin-bottom: 16px !important;
-  }
-
-  /* 4. Text & Button Spacing */
-  .hero h1 {
-    font-size: 30px !important;
-    margin-top: 0px !important;
-    margin-bottom: 8px !important;
-  }
-
-  .hero p {
-    font-size: 16px !important;
-    margin-bottom: 20px !important;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .hero .btn {
-    font-size: 16px !important;
-    padding: 12px 28px !important;
-    margin-bottom: 0px !important;
   }
 }
