@@ -1,39 +1,117 @@
+body {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.glass {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.skill-badge {
+    padding: 0.5rem 1.5rem;
+    background-color: #374151;
+    border-radius: 9999px;
+    border: 1px solid #4b5563;
+    transition: all 0.3s;
+}
+
+.project-card {
+    transition: transform 0.3s ease, border-color 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: #2563EB;
+}
+
+/* --- LIGHT THEME --- */
+.light-theme {
+    background-color: #F9FAFB !important;
+    color: #111827 !important;
+}
+
+.light-theme .glass {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-color: #E5E7EB !important;
+}
+
+.light-theme #mobile-menu {
+    background-color: #FFFFFF !important;
+    border-color: #E5E7EB !important;
+}
+
+.light-theme .card-bg, .light-theme .project-card {
+    background-color: #FFFFFF !important;
+    border-color: #E5E7EB !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .content-text { color: #374151 !important; }
+.light-theme .hero-subtext, .light-theme .secondary-text, .light-theme .contact-desc { 
+    color: #6B7280 !important; 
+}
+
+.light-theme .skill-badge {
+    background-color: #FFFFFF;
+    border-color: #D1D5DB;
+    color: #374151;
+}
+
+.light-theme input, .light-theme textarea {
+    background-color: #FFFFFF;
+    border-color: #D1D5DB;
+    color: #111827;
+}
+
+.light-theme .skills-bg {
+    background-color: #F3F4F6;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mobile view par logo, DP aur positioning fix karne ke liye */
 @media (max-width: 768px) {
+
+  /* 1. Logo ko Bada Karein (Top Left) */
+  /* Aapke logo ke text/element ki class/id yahan use karein. Main ".header .logo" example ke liye use kar raha hoon. */
+  .header .logo,
+  .navbar-brand {
+      font-size: 24px !important; /* Logo text ko bada karne ke liye */
+  }
+
+  /* 2. Hero Section ko Adjust Karein (DP upar karne ke liye) */
   .hero {
     min-height: auto !important;
     height: auto !important;
-    padding-top: 100px !important; /* Navbar ke niche space dene ke liye taaki DP overlap na kare */
+    padding-top: 70px !important; /* Yeh value kam ki hai taaki DP aur Upar aaye */
     padding-bottom: 40px !important;
     justify-content: flex-start !important;
     text-align: center;
   }
 
-  /* Profile Picture Size */
+  /* 3. Profile Picture Badi Karein */
+  /* Apne image tag ki class/id yahan use karein, jaise .profile-img */
   .hero img.rounded-full,
   .hero .profile-pic-container img {
-    width: 170px !important; /* Thoda balanced size taaki zyada bada na lage */
-    height: 170px !important;
+    width: 190px !important;  /* DP ko pehle se bada kiya (190px) */
+    height: 190px !important;
     margin-bottom: 20px !important;
   }
 
-  /* Main Heading ("Hi, I'm Umesh Thakur") */
+  /* 4. Text Sizes ko Re-balance Karein (Badi DP ke hisab se) */
   .hero h1 {
-    font-size: 32px !important;
-    line-height: 1.2 !important;
-    margin-bottom: 12px !important;
+    font-size: 34px !important; /* Heading thodi aur badi */
+    margin-bottom: 10px !important;
   }
 
-  /* Bio Text */
   .hero p {
-    font-size: 16px !important;
-    line-height: 1.5 !important;
-    margin-bottom: 25px !important;
+    font-size: 17px !important; /* Bio text thoda aur bada */
+    margin-bottom: 20px !important;
   }
 
-  /* Button ("View My Work") */
-  .hero .btn,
-  .hero button {
-    font-size: 16px !important;
-    padding: 14px 30px !important;
+  .hero .btn {
+    font-size: 17px !important;
   }
 }
