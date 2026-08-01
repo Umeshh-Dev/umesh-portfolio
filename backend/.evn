@@ -1,0 +1,1 @@
+MONGO_URI=mongodb://Umeshh911:UmeshhDB2005@ac-aojomjc-shard-00-00.nqw3vgf.mongodb.net:27017,ac-aojomjc-shard-00-01.nqw3vgf.mongodb.net:27017,ac-aojomjc-shard-00-02.nqw3vgf.mongodb.net:27017/portfolio?ssl=true&replicaSet=atlas-ndc8z7-shard-0&authSource=admin&appName=Cluster0

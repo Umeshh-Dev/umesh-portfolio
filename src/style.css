@@ -1,0 +1,72 @@
+body {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.glass {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.skill-badge {
+    padding: 0.5rem 1.5rem;
+    background-color: #374151;
+    border-radius: 9999px;
+    border: 1px solid #4b5563;
+    transition: all 0.3s;
+}
+
+.project-card {
+    transition: transform 0.3s ease, border-color 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: #2563EB;
+}
+
+/* --- LIGHT THEME --- */
+.light-theme {
+    background-color: #F9FAFB !important;
+    color: #111827 !important;
+}
+
+.light-theme .glass {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-color: #E5E7EB !important;
+}
+
+.light-theme #mobile-menu {
+    background-color: #FFFFFF !important;
+    border-color: #E5E7EB !important;
+}
+
+.light-theme .card-bg, .light-theme .project-card {
+    background-color: #FFFFFF !important;
+    border-color: #E5E7EB !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .content-text { color: #374151 !important; }
+.light-theme .hero-subtext, .light-theme .secondary-text, .light-theme .contact-desc { 
+    color: #6B7280 !important; 
+}
+
+.light-theme .skill-badge {
+    background-color: #FFFFFF;
+    border-color: #D1D5DB;
+    color: #374151;
+}
+
+.light-theme input, .light-theme textarea {
+    background-color: #FFFFFF;
+    border-color: #D1D5DB;
+    color: #111827;
+}
+
+.light-theme .skills-bg {
+    background-color: #F3F4F6;
+}
+html {
+  scroll-behavior: smooth;
+}
