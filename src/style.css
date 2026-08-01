@@ -72,10 +72,10 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Mobile view par logo, DP aur spacing fix karne ke liye */
+/* Mobile view par extra space khatam karne aur compact karne ke liye */
 @media (max-width: 768px) {
 
-  /* 1. Logo ko Bada Karein (Top Left) */
+  /* 1. Logo Bada Karein */
   header a, nav a, .header .logo, .navbar-brand, nav span, header span {
     font-size: 26px !important;
   }
@@ -84,39 +84,46 @@ html {
     max-height: 40px !important;
   }
 
-  /* 2. Hero Section ko Adjust Karein */
+  /* 2. Hero Section ka Extra Gap Hatayein */
   .hero {
-    min-height: auto !important;
+    min-height: unset !important;
     height: auto !important;
-    padding-top: 50px !important;
-    padding-bottom: 30px !important;
+    padding-top: 15px !important;    /* Upar ka gap ekdam kam kar diya */
+    padding-bottom: 20px !important; /* Niche ka gap bhi kam kar diya */
+    display: flex !important;
+    flex-direction: column !important;
     justify-content: flex-start !important;
+    align-items: center !important;
     text-align: center;
   }
 
-  /* 3. Profile Picture ko Bada Karein (210px) */
+  /* 3. Profile Picture Size & Spacing */
   .hero img.rounded-full,
   .hero .profile-pic-container img,
   .hero img {
-    width: 210px !important;  
-    height: 210px !important;
-    margin-top: 5px !important;
-    margin-bottom: 15px !important;
+    width: 170px !important;  
+    height: 170px !important;
+    margin-top: 0px !important;
+    margin-bottom: 12px !important;
   }
 
-  /* 4. Text Sizes ko Re-balance Karein */
+  /* 4. Text & Button Spacing ko Tight Karein */
   .hero h1 {
-    font-size: 32px !important;
-    margin-bottom: 8px !important;
+    font-size: 28px !important;
+    margin-top: 0px !important;
+    margin-bottom: 6px !important;
   }
 
   .hero p {
-    font-size: 16px !important;
+    font-size: 15px !important;
     margin-bottom: 15px !important;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .hero .btn {
-    font-size: 16px !important;
-    padding: 12px 28px !important;
+    font-size: 15px !important;
+    padding: 10px 24px !important;
+    margin-bottom: 0px !important;
   }
 }
