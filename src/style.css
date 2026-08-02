@@ -1,16 +1,29 @@
 body {
     font-family: 'Inter', sans-serif;
-    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
 }
 
-/* Scroll padding ko hata diya hai taaki click karne par section bilkul top par navbar ke niche khule */
+/* --- SCROLL SNAP CONFIGURATION --- */
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .glass {
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
 }
 
 .skill-badge {
@@ -30,19 +43,23 @@ html {
     border-color: #2563EB;
 }
 
-/* --- LIGHT THEME --- */
+/* =========================================
+   --- LIGHT THEME SETTINGS --- 
+========================================= */
 .light-theme {
     background-color: #F9FAFB !important;
     color: #111827 !important;
 }
 
-.light-theme .glass {
-    background: rgba(255, 255, 255, 0.8) !important;
-    border-color: #E5E7EB !important;
+.light-theme h1,
+.light-theme h2,
+.light-theme h3,
+.light-theme h4 {
+    color: #111827 !important;
 }
 
-.light-theme #mobile-menu {
-    background-color: #FFFFFF !important;
+.light-theme .glass {
+    background: rgba(255, 255, 255, 0.95) !important;
     border-color: #E5E7EB !important;
 }
 
@@ -71,55 +88,4 @@ html {
 
 .light-theme .skills-bg {
     background-color: #F3F4F6;
-}
-
-/* Mobile view optimization */
-@media (max-width: 768px) {
-  header a, nav a, .header .logo, .navbar-brand, nav span, header span {
-    font-size: 26px !important;
-  }
-  
-  header img, nav img {
-    max-height: 40px !important;
-  }
-
-  .hero {
-    min-height: 75vh !important;
-    height: auto !important;
-    padding-top: 30px !important;    
-    padding-bottom: 30px !important; 
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center;
-  }
-
-  .hero img.rounded-full,
-  .hero .profile-pic-container img,
-  .hero img {
-    width: 180px !important;  
-    height: 180px !important;
-    margin-top: 0px !important;
-    margin-bottom: 16px !important;
-  }
-
-  .hero h1 {
-    font-size: 30px !important;
-    margin-top: 0px !important;
-    margin-bottom: 8px !important;
-  }
-
-  .hero p {
-    font-size: 16px !important;
-    margin-bottom: 20px !important;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .hero .btn {
-    font-size: 16px !important;
-    padding: 12px 28px !important;
-    margin-bottom: 0px !important;
-  }
 }
