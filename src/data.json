@@ -8,7 +8,13 @@
   },
   "projects": [],
   "education": [],
-  "skills": [],
+  "skills": [
+    {
+      "name": "Excel",
+      "description": "",
+      "_id": "1791040234512"
+    }
+  ],
   "achievements": [],
   "resume": []
 }
