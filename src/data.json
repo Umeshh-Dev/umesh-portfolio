@@ -6,7 +6,18 @@
     "aboutText": "I am a passionate Data Analyst with a strong foundation in Python, SQL, and data visualization tools like Power BI and Tableau. I love turning complex datasets into actionable business insights.",
     "profileImage": "/Profile Picture.jpeg"
   },
-  "projects": [],
+  "projects": [
+    {
+      "title": "Zomato sales prediction",
+      "description": "Zomato sales ",
+      "liveLink": "",
+      "githubLink": "",
+      "icon": "fas fa-code",
+      "bgColor": "bg-[#2563EB]",
+      "imageUrl": "",
+      "_id": "1791035480569"
+    }
+  ],
   "education": [],
   "skills": [],
   "achievements": [],
