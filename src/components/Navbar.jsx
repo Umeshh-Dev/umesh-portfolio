@@ -18,7 +18,7 @@ export default function Navbar({ isAdminLoggedIn, setIsAdminLoggedIn, isDarkMode
         alert("🔒 Admin Logged Out!");
       } else {
         const pwd = prompt("Enter Admin Password:");
-        if (pwd === "Umesh123") {
+        if (pwd === import.meta.env.VITE_ADMIN_PASSWORD) {
           localStorage.setItem('isAdmin', 'true');
           setIsAdminLoggedIn(true);
           alert("🔓 Admin Access Granted!");
