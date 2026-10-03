@@ -39,15 +39,15 @@ export default function Navbar({ isAdminLoggedIn, setIsAdminLoggedIn, isDarkMode
       
       {/* DESKTOP MENU - Optimized Order */}
       <div className="hidden md:flex space-x-6 lg:space-x-8 font-medium items-center text-sm lg:text-base">
-        <a href="#home" className="hover:text-[#2563EB] transition">Home</a>
-        <a href="#about" className="hover:text-[#2563EB] transition">About</a>
-        <a href="#skills" className="hover:text-[#2563EB] transition">Skills</a>
-        <a href="#projects" className="hover:text-[#2563EB] transition">Projects</a>
-        <a href="#education-section" className="hover:text-[#2563EB] transition">Education</a>
-        <a href="#achievements" className="hover:text-[#2563EB] transition">Achievements</a>
-        <a href="#contact" className="hover:text-[#2563EB] transition">Contact</a>
+        <a href="#home" className="hover:text-[#2563EB] transition nav-link">Home</a>
+        <a href="#about" className="hover:text-[#2563EB] transition nav-link">About</a>
+        <a href="#skills" className="hover:text-[#2563EB] transition nav-link">Skills</a>
+        <a href="#projects" className="hover:text-[#2563EB] transition nav-link">Projects</a>
+        <a href="#education-section" className="hover:text-[#2563EB] transition nav-link">Education</a>
+        <a href="#achievements" className="hover:text-[#2563EB] transition nav-link">Achievements</a>
+        <a href="#contact" className="hover:text-[#2563EB] transition nav-link">Contact</a>
         <div className="inline-flex items-center gap-2">
-          <a href={activeResumeLink} target="_blank" rel="noreferrer" className="hover:text-[#2563EB] transition">Resume</a>
+          <a href={activeResumeLink} target="_blank" rel="noreferrer" className="hover:text-[#2563EB] transition nav-link">Resume</a>
           {isAdminLoggedIn && (
             <button onClick={() => setIsResumeModalOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded-lg text-xs font-semibold transition" title="Edit Resume">
               <i className="fas fa-edit"></i>
@@ -65,22 +65,22 @@ export default function Navbar({ isAdminLoggedIn, setIsAdminLoggedIn, isDarkMode
         <button onClick={toggleTheme} className={`p-2 rounded-full transition ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-200'}`}>
           <i className={`fas ${isDarkMode ? 'fa-moon' : 'fa-sun'}`} style={{ color: isDarkMode ? '' : '#F59E0B' }}></i>
         </button>
-        <button onClick={toggleMobileMenu} className="md:hidden text-2xl focus:outline-none p-1">
+        <button onClick={toggleMobileMenu} className="md:hidden text-2xl focus:outline-none p-1 nav-link">
           <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
         </button>
       </div>
 
       {/* MOBILE MENU - Optimized Order */}
-      <div className={`${isMobileMenuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full bg-[#0F172A] border-b border-gray-800 flex-col p-6 space-y-4 md:hidden shadow-xl transition-all`}>
-        <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Home</a>
-        <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">About</a>
-        <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Skills</a>
-        <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Projects</a>
-        <a href="#education-section" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Education</a>
-        <a href="#achievements" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Achievements</a>
-        <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Contact</a>
+      <div className={`${isMobileMenuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full bg-[#0F172A] mobile-menu-bg border-b border-gray-800 flex-col p-6 space-y-4 md:hidden shadow-xl transition-all`}>
+        <a href="#home" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2 nav-link">Home</a>
+        <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2 nav-link">About</a>
+        <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2 nav-link">Skills</a>
+        <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2 nav-link">Projects</a>
+        <a href="#education-section" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2 nav-link">Education</a>
+        <a href="#achievements" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2 nav-link">Achievements</a>
+        <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2 nav-link">Contact</a>
         <div className="flex items-center justify-between border-b border-gray-700 pb-2">
-          <a href={activeResumeLink} target="_blank" rel="noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base">Resume</a>
+          <a href={activeResumeLink} target="_blank" rel="noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base nav-link">Resume</a>
           {isAdminLoggedIn && (
             <button onClick={() => { setIsMobileMenuOpen(false); setIsResumeModalOpen(true); }} className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-xs font-semibold">
               Edit Resume

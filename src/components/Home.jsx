@@ -29,7 +29,7 @@ export default function Home({ profile, isAdminLoggedIn, setIsProfileModalOpen }
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 text-white"
+          className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4"
         >
           Hi, I'm <span className="text-[#2563EB]">{profile?.name?.split(' ')[0] || "Umesh"} {profile?.name?.split(' ').slice(1).join(' ') || "Thakur"}</span>
         </motion.h1>

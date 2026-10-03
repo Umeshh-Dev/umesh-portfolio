@@ -310,7 +310,7 @@ function App() {
       {/* --- ALL MODALS --- */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-900 border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
+          <div className="bg-gray-900 card-bg border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
             <button type="button" onClick={() => setIsAddModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-2"><i className="fas fa-times"></i></button>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide mb-6 text-center text-white border-b border-gray-800 pb-4">Add New Project</h3>
             <form onSubmit={handleAddProject} className="space-y-4">
@@ -333,7 +333,7 @@ function App() {
 
       {isEduModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-900 border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
+          <div className="bg-gray-900 card-bg border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
             <button type="button" onClick={() => setIsEduModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-2"><i className="fas fa-times"></i></button>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide mb-6 text-center text-white border-b border-gray-800 pb-4">Add Education</h3>
             <form onSubmit={handleAddEducation} className="space-y-4">
@@ -355,7 +355,7 @@ function App() {
 
       {isSkillModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-900 border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
+          <div className="bg-gray-900 card-bg border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
             <button type="button" onClick={() => setIsSkillModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-2"><i className="fas fa-times"></i></button>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide mb-6 text-center text-white border-b border-gray-800 pb-4">Add New Skill</h3>
             <form onSubmit={handleAddSkill} className="space-y-4">
@@ -371,7 +371,7 @@ function App() {
 
       {isResumeModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-900 border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
+          <div className="bg-gray-900 card-bg border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
             <button type="button" onClick={() => setIsResumeModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-2"><i className="fas fa-times"></i></button>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide mb-6 text-center text-white border-b border-gray-800 pb-4">Manage Resume</h3>
             <form onSubmit={handleAddResume} className="space-y-4">
@@ -396,7 +396,7 @@ function App() {
 
       {isAchievementModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-900 border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
+          <div className="bg-gray-900 card-bg border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
             <button type="button" onClick={() => setIsAchievementModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-2"><i className="fas fa-times"></i></button>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide mb-6 text-center text-white border-b border-gray-800 pb-4">Add Achievement</h3>
             <form onSubmit={handleAddAchievement} className="space-y-4">
@@ -419,7 +419,7 @@ function App() {
 
       {isProfileModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-gray-900 border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
+          <div className="bg-gray-900 card-bg border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
             <button type="button" onClick={() => setIsProfileModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-2"><i className="fas fa-times"></i></button>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide mb-6 text-center text-white border-b border-gray-800 pb-4">Edit Profile Info</h3>
             <form onSubmit={handleSaveProfile} className="space-y-4">
