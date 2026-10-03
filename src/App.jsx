@@ -84,6 +84,14 @@ function App() {
     await saveToGitHub(fullData);
   };
 
+  // Scroll to Top on Page Load
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   // Theme Toggler
   useEffect(() => {
     if (isDarkMode) document.body.classList.remove('light-theme');
