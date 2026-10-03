@@ -22,6 +22,7 @@ function App() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEduModalOpen, setIsEduModalOpen] = useState(false);
   const [isSkillModalOpen, setIsSkillModalOpen] = useState(false);
+  const [viewSkill, setViewSkill] = useState(null);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const [isAchievementModalOpen, setIsAchievementModalOpen] = useState(false);
   
@@ -44,7 +45,7 @@ function App() {
     "Python", "Python Libraries", "DBMS (SQL)", "Power BI Desktop", "Tableau", "HTML", "CSS", "Git & GitHub", "Advance Excel", "MongoDB"
   ]);
   const [customSkills, setCustomSkills] = useState(initialData.skills || []);
-  const [newSkill, setNewSkill] = useState({ name: '' });
+  const [newSkill, setNewSkill] = useState({ name: '', description: '' });
 
   const [resumes, setResumes] = useState(initialData.resume || []);
   const [newResume, setNewResume] = useState({ fileName: '', fileData: '' });
@@ -156,7 +157,7 @@ function App() {
       const updatedSkills = [...customSkills, newSkillWithId];
       await syncData({ skills: updatedSkills });
       setCustomSkills(updatedSkills);
-      setNewSkill({ name: '' });
+      setNewSkill({ name: '', description: '' });
       setIsSkillModalOpen(false);
       showToast("Skill added successfully!");
     } catch (err) { showToast(err.message || "Network Error", "error"); } finally { setIsSavingSkill(false); }
@@ -286,6 +287,7 @@ function App() {
         setIsSkillModalOpen={setIsSkillModalOpen}
         handleDeleteDefaultSkill={handleDeleteDefaultSkill}
         handleDeleteCustomSkill={handleDeleteCustomSkill}
+        setViewSkill={setViewSkill}
       />
       
       <Projects 
@@ -367,7 +369,8 @@ function App() {
             <button type="button" onClick={() => setIsSkillModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-2"><i className="fas fa-times"></i></button>
             <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide mb-6 text-center text-white border-b border-gray-800 pb-4">Add New Skill</h3>
             <form onSubmit={handleAddSkill} className="space-y-4">
-              <input type="text" placeholder="Skill Name" required value={newSkill.name} onChange={(e) => setNewSkill({ name: e.target.value })} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB]" />
+              <input type="text" placeholder="Skill Name" required value={newSkill.name} onChange={(e) => setNewSkill({ ...newSkill, name: e.target.value })} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB]" />
+                <textarea placeholder="Skill Description (Optional)" rows="3" value={newSkill.description} onChange={(e) => setNewSkill({ ...newSkill, description: e.target.value })} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB] resize-none"></textarea>
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button type="button" onClick={() => setIsSkillModalOpen(false)} className="w-full sm:w-1/2 bg-gray-700 text-white font-medium py-3 rounded-xl">Cancel</button>
                 <button type="submit" disabled={isSavingSkill} className="w-full sm:w-1/2 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold py-3 rounded-xl disabled:opacity-50">{isSavingSkill ? 'Saving...' : 'Save Skill'}</button>
@@ -440,6 +443,24 @@ function App() {
                 <button type="submit" disabled={isSavingProfile} className="w-full sm:w-1/2 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold py-3 rounded-xl disabled:opacity-50">{isSavingProfile ? 'Saving...' : 'Save Profile'}</button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      
+      {/* View Skill Modal */}
+      {viewSkill && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto" onClick={() => setViewSkill(null)}>
+          <div className="bg-gray-900 card-bg border border-gray-700 w-full max-w-md p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto transform transition-all scale-100 opacity-100" onClick={e => e.stopPropagation()}>
+            <button type="button" onClick={() => setViewSkill(null)} className="absolute top-4 right-4 text-gray-400 hover:text-[#2563EB] text-xl font-bold p-2 transition"><i className="fas fa-times"></i></button>
+            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-wide mb-4 text-center text-[#2563EB]">{viewSkill.name}</h3>
+            <div className="text-gray-300 content-text leading-relaxed text-center whitespace-pre-wrap">
+              {viewSkill.description ? viewSkill.description : `${viewSkill.name} is a key skill I have acquired through my projects and experience. I use it to solve complex problems and build efficient solutions.`}
+            </div>
+            <div className="mt-6 flex justify-center">
+              <a href={`https://www.google.com/search?q=${encodeURIComponent(viewSkill.name + " programming")}`} target="_blank" rel="noreferrer" className="text-sm text-[#2563EB] hover:underline font-semibold flex items-center gap-2">
+                Learn more about {viewSkill.name} <i className="fas fa-external-link-alt text-xs"></i>
+              </a>
+            </div>
           </div>
         </div>
       )}

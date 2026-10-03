@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export default function Skills({ defaultSkills, customSkills, isAdminLoggedIn, setIsSkillModalOpen, handleDeleteDefaultSkill, handleDeleteCustomSkill }) {
+export default function Skills({ defaultSkills, customSkills, isAdminLoggedIn, setIsSkillModalOpen, handleDeleteDefaultSkill, handleDeleteCustomSkill, setViewSkill }) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -43,14 +43,14 @@ export default function Skills({ defaultSkills, customSkills, isAdminLoggedIn, s
         >
           {defaultSkills.map((skill, index) => (
             <motion.div 
-              key={`default-${index}`} 
+              key={`default-${index}`} onClick={() => setViewSkill({ name: skill })} 
               variants={badgeVariants}
               whileHover={{ scale: 1.1, backgroundColor: "#2563EB", borderColor: "#2563EB", color: "#fff" }}
-              className="skill-badge inline-flex items-center gap-2 cursor-default font-medium text-sm sm:text-base shadow-sm"
+              className="skill-badge inline-flex items-center gap-2 cursor-pointer font-medium text-sm sm:text-base shadow-sm"
             >
               <span>{skill}</span>
               {isAdminLoggedIn && (
-                <button onClick={() => handleDeleteDefaultSkill(index)} className="text-red-400 hover:text-white ml-1 p-0.5 transition cursor-pointer" title="Delete">
+                <button onClick={(e) => { e.stopPropagation(); handleDeleteDefaultSkill(index); }} className="text-red-400 hover:text-white ml-1 p-0.5 transition cursor-pointer" title="Delete">
                   <i className="fas fa-times text-xs"></i>
                 </button>
               )}
@@ -58,14 +58,14 @@ export default function Skills({ defaultSkills, customSkills, isAdminLoggedIn, s
           ))}
           {customSkills.map((skill, index) => (
             <motion.div 
-              key={`custom-${index}`} 
+              key={`custom-${index}`} onClick={() => setViewSkill(skill)} 
               variants={badgeVariants}
               whileHover={{ scale: 1.1, backgroundColor: "#2563EB", borderColor: "#2563EB", color: "#fff" }}
-              className="skill-badge inline-flex items-center gap-2 cursor-default font-medium text-sm sm:text-base shadow-sm"
+              className="skill-badge inline-flex items-center gap-2 cursor-pointer font-medium text-sm sm:text-base shadow-sm"
             >
               <span>{skill.name}</span>
               {isAdminLoggedIn && (
-                <button onClick={() => handleDeleteCustomSkill(skill._id)} className="text-red-400 hover:text-white ml-1 p-0.5 transition cursor-pointer" title="Delete">
+                <button onClick={(e) => { e.stopPropagation(); handleDeleteCustomSkill(skill._id); }} className="text-red-400 hover:text-white ml-1 p-0.5 transition cursor-pointer" title="Delete">
                   <i className="fas fa-times text-xs"></i>
                 </button>
               )}
