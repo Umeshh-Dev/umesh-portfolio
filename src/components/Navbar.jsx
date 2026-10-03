@@ -44,6 +44,7 @@ export default function Navbar({ isAdminLoggedIn, setIsAdminLoggedIn, isDarkMode
         <a href="#skills" className="hover:text-[#2563EB] transition">Skills</a>
         <a href="#projects" className="hover:text-[#2563EB] transition">Projects</a>
         <a href="#education-section" className="hover:text-[#2563EB] transition">Education</a>
+        <a href="#achievements" className="hover:text-[#2563EB] transition">Achievements</a>
         <a href="#contact" className="hover:text-[#2563EB] transition">Contact</a>
         <div className="inline-flex items-center gap-2">
           <a href={activeResumeLink} target="_blank" rel="noreferrer" className="hover:text-[#2563EB] transition">Resume</a>
@@ -76,6 +77,7 @@ export default function Navbar({ isAdminLoggedIn, setIsAdminLoggedIn, isDarkMode
         <a href="#skills" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Skills</a>
         <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Projects</a>
         <a href="#education-section" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Education</a>
+        <a href="#achievements" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Achievements</a>
         <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base border-b border-gray-700 pb-2">Contact</a>
         <div className="flex items-center justify-between border-b border-gray-700 pb-2">
           <a href={activeResumeLink} target="_blank" rel="noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#2563EB] text-base">Resume</a>

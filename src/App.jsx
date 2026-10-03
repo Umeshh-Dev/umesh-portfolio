@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import initialData from './data.json';
+import { saveToGitHub } from './githubApi';
 import './style.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -6,6 +8,7 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Education from './components/Education';
+import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 
 function App() {
@@ -20,37 +23,66 @@ function App() {
   const [isEduModalOpen, setIsEduModalOpen] = useState(false);
   const [isSkillModalOpen, setIsSkillModalOpen] = useState(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  const [isAchievementModalOpen, setIsAchievementModalOpen] = useState(false);
   
   // Saving States
   const [isSavingProject, setIsSavingProject] = useState(false);
   const [isSavingEdu, setIsSavingEdu] = useState(false);
   const [isSavingSkill, setIsSavingSkill] = useState(false);
   const [isSavingResume, setIsSavingResume] = useState(false);
+  const [isSavingAchievement, setIsSavingAchievement] = useState(false);
 
   // Data States
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(initialData.projects || []);
   const [newProject, setNewProject] = useState({ title: '', description: '', liveLink: '', githubLink: '', icon: 'fas fa-code', bgColor: 'bg-[#2563EB]', imageUrl: '' });
 
-  const [educations, setEducations] = useState([]);
+  const [educations, setEducations] = useState(initialData.education || []);
   const [newEdu, setNewEdu] = useState({ category: 'Academic Background', title: '', subtitle: '', year: '', icon: 'fas fa-graduation-cap' });
 
   // Default Skills and Custom Skills
   const [defaultSkills, setDefaultSkills] = useState([
     "Python", "Python Libraries", "DBMS (SQL)", "Power BI Desktop", "Tableau", "HTML", "CSS", "Git & GitHub", "Advance Excel", "MongoDB"
   ]);
-  const [customSkills, setCustomSkills] = useState([]);
+  const [customSkills, setCustomSkills] = useState(initialData.skills || []);
   const [newSkill, setNewSkill] = useState({ name: '' });
 
-  const [resumes, setResumes] = useState([]);
+  const [resumes, setResumes] = useState(initialData.resume || []);
   const [newResume, setNewResume] = useState({ fileName: '', fileData: '' });
 
-  // Fetch API Data
-  useEffect(() => {
-    fetch('http://localhost:5000/api/projects').then(res => res.json()).then(data => setProjects(data)).catch(err => console.error(err));
-    fetch('http://localhost:5000/api/education').then(res => res.json()).then(data => setEducations(data)).catch(err => console.error(err));
-    fetch('http://localhost:5000/api/skills').then(res => res.json()).then(data => setCustomSkills(data)).catch(err => console.error(err));
-    fetch('http://localhost:5000/api/resume').then(res => res.json()).then(data => setResumes(data)).catch(err => console.error(err));
-  }, []);
+  const [achievements, setAchievements] = useState(initialData.achievements || []);
+  const [newAchievement, setNewAchievement] = useState({ category: 'Certification', title: '', issuer: '', description: '', icon: 'fas fa-award text-yellow-400' });
+
+  const [profile, setProfile] = useState(initialData.profile || {
+    name: "Umesh Thakur",
+    tagline: "Transforming raw data into intelligent insights using Python, SQL, and AI.",
+    aboutHeading: "Data Analyst & Tech Enthusiast",
+    aboutText: "I am a passionate Data Analyst with a strong foundation in Python, SQL, and data visualization tools like Power BI and Tableau. I love turning complex datasets into actionable business insights.",
+    profileImage: "/Profile Picture.jpeg"
+  });
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isSavingProfile, setIsSavingProfile] = useState(false);
+
+  // Toast Notification State (iPhone Style)
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
+
+  const showToast = (message, type = 'success') => {
+    setToast({ show: true, message, type });
+    setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 3000);
+  };
+
+  // Sync to GitHub
+  const syncData = async (updatedDataOverrides) => {
+    const fullData = {
+      profile,
+      projects,
+      education: educations,
+      skills: customSkills,
+      achievements,
+      resume: resumes,
+      ...updatedDataOverrides
+    };
+    await saveToGitHub(fullData);
+  };
 
   // Theme Toggler
   useEffect(() => {
@@ -84,71 +116,136 @@ function App() {
     e.preventDefault();
     setIsSavingProject(true);
     try {
-      const res = await fetch('http://localhost:5000/api/projects', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-secret': 'Umesh123' }, body: JSON.stringify(newProject) });
-      const data = await res.json();
-      if (res.ok) { setProjects([...projects, data]); setNewProject({ title: '', description: '', liveLink: '', githubLink: '', icon: 'fas fa-code', bgColor: 'bg-[#2563EB]', imageUrl: '' }); setIsAddModalOpen(false); alert("✅ Project added successfully!"); } else alert("❌ " + data.message);
-    } catch (err) { alert("❌ Network Error"); } finally { setIsSavingProject(false); }
+      const newProjWithId = { ...newProject, _id: Date.now().toString() };
+      const updatedProjects = [...projects, newProjWithId];
+      await syncData({ projects: updatedProjects });
+      setProjects(updatedProjects);
+      setNewProject({ title: '', description: '', liveLink: '', githubLink: '', icon: 'fas fa-code', bgColor: 'bg-[#2563EB]', imageUrl: '' });
+      setIsAddModalOpen(false);
+      showToast("Project added successfully!");
+    } catch (err) { showToast(err.message || "Network Error", "error"); } finally { setIsSavingProject(false); }
   };
 
   const handleAddEducation = async (e) => {
     e.preventDefault();
     setIsSavingEdu(true);
     try {
-      const res = await fetch('http://localhost:5000/api/education', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-secret': 'Umesh123' }, body: JSON.stringify(newEdu) });
-      const data = await res.json();
-      if (res.ok) { setEducations([...educations, data]); setNewEdu({ category: 'Academic Background', title: '', subtitle: '', year: '', icon: 'fas fa-graduation-cap' }); setIsEduModalOpen(false); alert("✅ Education added successfully!"); } else alert("❌ " + data.message);
-    } catch (err) { alert("❌ Network Error"); } finally { setIsSavingEdu(false); }
+      const newEduWithId = { ...newEdu, _id: Date.now().toString() };
+      const updatedEdu = [...educations, newEduWithId];
+      await syncData({ education: updatedEdu });
+      setEducations(updatedEdu);
+      setNewEdu({ category: 'Academic Background', title: '', subtitle: '', year: '', icon: 'fas fa-graduation-cap' });
+      setIsEduModalOpen(false);
+      showToast("Education added successfully!");
+    } catch (err) { showToast(err.message || "Network Error", "error"); } finally { setIsSavingEdu(false); }
   };
 
-  // Local Skill Addition (Fixed Network Error)
-  const handleAddSkill = (e) => {
+  const handleAddSkill = async (e) => {
     e.preventDefault();
     setIsSavingSkill(true);
-    const newCustomSkillObj = { _id: Date.now().toString(), name: newSkill.name };
-    setCustomSkills([...customSkills, newCustomSkillObj]);
-    setNewSkill({ name: '' });
-    setIsSkillModalOpen(false);
-    setIsSavingSkill(false);
-    alert("✅ Skill added successfully!");
+    try {
+      const newSkillWithId = { ...newSkill, _id: Date.now().toString() };
+      const updatedSkills = [...customSkills, newSkillWithId];
+      await syncData({ skills: updatedSkills });
+      setCustomSkills(updatedSkills);
+      setNewSkill({ name: '' });
+      setIsSkillModalOpen(false);
+      showToast("Skill added successfully!");
+    } catch (err) { showToast(err.message || "Network Error", "error"); } finally { setIsSavingSkill(false); }
   };
 
   const handleAddResume = async (e) => {
     e.preventDefault();
     setIsSavingResume(true);
     try {
-      const res = await fetch('http://localhost:5000/api/resume', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-secret': 'Umesh123' }, body: JSON.stringify(newResume) });
-      const data = await res.json();
-      if (res.ok) { setResumes([data]); setNewResume({ fileName: '', fileData: '' }); setIsResumeModalOpen(false); alert("✅ Resume updated successfully!"); } else alert("❌ " + data.message);
-    } catch (err) { alert("❌ Network Error"); } finally { setIsSavingResume(false); }
+      const newResWithId = { ...newResume, _id: Date.now().toString() };
+      const updatedResumes = [newResWithId];
+      await syncData({ resume: updatedResumes });
+      setResumes(updatedResumes);
+      setNewResume({ fileName: '', fileData: '' });
+      setIsResumeModalOpen(false);
+      showToast("Resume updated successfully!");
+    } catch (err) { showToast(err.message || "Network Error", "error"); } finally { setIsSavingResume(false); }
+  };
+
+  const handleSaveProfile = async (e) => {
+    e.preventDefault();
+    setIsSavingProfile(true);
+    try {
+      await syncData({ profile });
+      setIsProfileModalOpen(false);
+      showToast("Profile updated successfully!");
+    } catch (err) { showToast(err.message || "Network Error", "error"); } finally { setIsSavingProfile(false); }
+  };
+
+  const handleAddAchievement = async (e) => {
+    e.preventDefault();
+    setIsSavingAchievement(true);
+    try {
+      const newAchWithId = { ...newAchievement, _id: Date.now().toString() };
+      const updatedAch = [...achievements, newAchWithId];
+      await syncData({ achievements: updatedAch });
+      setAchievements(updatedAch);
+      setNewAchievement({ category: 'Certification', title: '', issuer: '', description: '', icon: 'fas fa-award text-yellow-400' });
+      setIsAchievementModalOpen(false);
+      showToast("Achievement added successfully!");
+    } catch (err) { showToast(err.message || "Network Error", "error"); } finally { setIsSavingAchievement(false); }
   };
 
   // Delete Functions
   const handleDeleteProject = async (id) => {
     if (!window.confirm("Delete this project?")) return;
-    const res = await fetch(`http://localhost:5000/api/projects/${id}`, { method: 'DELETE', headers: { 'x-admin-secret': 'Umesh123' } });
-    if (res.ok) setProjects(projects.filter(p => p._id !== id)); else alert("❌ Unauthorized deletion!");
+    try {
+      const updated = projects.filter(p => p._id !== id);
+      await syncData({ projects: updated });
+      setProjects(updated);
+      showToast("Project deleted");
+    } catch(err) { showToast(err.message, "error"); }
   };
 
   const handleDeleteEducation = async (id) => {
     if (!window.confirm("Delete this education?")) return;
-    const res = await fetch(`http://localhost:5000/api/education/${id}`, { method: 'DELETE', headers: { 'x-admin-secret': 'Umesh123' } });
-    if (res.ok) setEducations(educations.filter(e => e._id !== id)); else alert("❌ Unauthorized deletion!");
+    try {
+      const updated = educations.filter(e => e._id !== id);
+      await syncData({ education: updated });
+      setEducations(updated);
+      showToast("Education deleted");
+    } catch(err) { showToast(err.message, "error"); }
   };
 
   const handleDeleteDefaultSkill = (indexToRemove) => {
     if (!window.confirm("Delete this skill?")) return;
     setDefaultSkills(defaultSkills.filter((_, index) => index !== indexToRemove));
+    showToast("Default skill removed");
   };
 
-  const handleDeleteCustomSkill = (id) => {
+  const handleDeleteCustomSkill = async (id) => {
     if (!window.confirm("Delete this skill?")) return;
-    setCustomSkills(customSkills.filter(s => s._id !== id));
+    try {
+      const updated = customSkills.filter(s => s._id !== id);
+      await syncData({ skills: updated });
+      setCustomSkills(updated);
+      showToast("Skill deleted");
+    } catch(err) { showToast(err.message, "error"); }
   };
 
   const handleDeleteResume = async (id) => {
     if (!window.confirm("Remove custom resume? It will revert to the default file.")) return;
-    const res = await fetch(`http://localhost:5000/api/resume/${id}`, { method: 'DELETE', headers: { 'x-admin-secret': 'Umesh123' } });
-    if (res.ok) { setResumes([]); alert("🗑️ Custom resume removed!"); } else alert("❌ Unauthorized deletion!");
+    try {
+      await syncData({ resume: [] });
+      setResumes([]);
+      showToast("Custom resume removed!");
+    } catch(err) { showToast(err.message, "error"); }
+  };
+
+  const handleDeleteAchievement = async (id) => {
+    if (!window.confirm("Delete this achievement?")) return;
+    try {
+      const updated = achievements.filter(a => a._id !== id);
+      await syncData({ achievements: updated });
+      setAchievements(updated);
+      showToast("Achievement deleted");
+    } catch(err) { showToast(err.message, "error"); }
   };
 
   return (
@@ -163,8 +260,16 @@ function App() {
         setIsResumeModalOpen={setIsResumeModalOpen} 
       />
       
-      <Home />
-      <About projectCount={projects.length} eduCount={educations.length} />
+      <Home 
+        profile={profile} 
+        isAdminLoggedIn={isAdminLoggedIn} 
+        setIsProfileModalOpen={setIsProfileModalOpen} 
+      />
+      <About 
+        projectCount={projects.length} 
+        eduCount={educations.length} 
+        profile={profile} 
+      />
       
       <Skills 
         defaultSkills={defaultSkills}
@@ -187,6 +292,13 @@ function App() {
         isAdminLoggedIn={isAdminLoggedIn} 
         setIsEduModalOpen={setIsEduModalOpen} 
         handleDeleteEducation={handleDeleteEducation} 
+      />
+      
+      <Achievements 
+        achievements={achievements}
+        isAdminLoggedIn={isAdminLoggedIn}
+        setIsAchievementModalOpen={setIsAchievementModalOpen}
+        handleDeleteAchievement={handleDeleteAchievement}
       />
       
       <Contact />
@@ -281,6 +393,67 @@ function App() {
           </div>
         </div>
       )}
+
+      {isAchievementModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-gray-900 border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
+            <button type="button" onClick={() => setIsAchievementModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-2"><i className="fas fa-times"></i></button>
+            <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide mb-6 text-center text-white border-b border-gray-800 pb-4">Add Achievement</h3>
+            <form onSubmit={handleAddAchievement} className="space-y-4">
+              <select value={newAchievement.category} onChange={(e) => setNewAchievement({...newAchievement, category: e.target.value, icon: e.target.value === 'Certification' ? 'fas fa-certificate text-yellow-400' : e.target.value === 'Teaching & Training' ? 'fas fa-chalkboard-teacher text-[#2563EB]' : 'fas fa-trophy text-emerald-400'})} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none">
+                <option value="Certification">Certification</option>
+                <option value="Teaching & Training">Teaching & Training</option>
+                <option value="Project Achievement">Project Achievement</option>
+              </select>
+              <input type="text" placeholder="Title" required value={newAchievement.title} onChange={(e) => setNewAchievement({...newAchievement, title: e.target.value})} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB]" />
+              <input type="text" placeholder="Issuer / Organization" required value={newAchievement.issuer} onChange={(e) => setNewAchievement({...newAchievement, issuer: e.target.value})} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB]" />
+              <textarea placeholder="Description" rows="3" required value={newAchievement.description} onChange={(e) => setNewAchievement({...newAchievement, description: e.target.value})} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB] resize-none"></textarea>
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <button type="button" onClick={() => setIsAchievementModalOpen(false)} className="w-full sm:w-1/2 bg-gray-700 text-white font-medium py-3 rounded-xl">Cancel</button>
+                <button type="submit" disabled={isSavingAchievement} className="w-full sm:w-1/2 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold py-3 rounded-xl disabled:opacity-50">{isSavingAchievement ? 'Saving...' : 'Save Achievement'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {isProfileModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-gray-900 border border-gray-700 w-full max-w-md sm:max-w-lg p-6 sm:p-8 rounded-2xl shadow-2xl relative my-auto">
+            <button type="button" onClick={() => setIsProfileModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold p-2"><i className="fas fa-times"></i></button>
+            <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide mb-6 text-center text-white border-b border-gray-800 pb-4">Edit Profile Info</h3>
+            <form onSubmit={handleSaveProfile} className="space-y-4">
+              <input type="text" placeholder="Your Name" required value={profile.name} onChange={(e) => setProfile({...profile, name: e.target.value})} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB]" />
+              <textarea placeholder="Tagline (Home Section)" rows="2" required value={profile.tagline} onChange={(e) => setProfile({...profile, tagline: e.target.value})} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB] resize-none"></textarea>
+              <input type="text" placeholder="About Heading" required value={profile.aboutHeading} onChange={(e) => setProfile({...profile, aboutHeading: e.target.value})} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB]" />
+              <textarea placeholder="About Text" rows="4" required value={profile.aboutText} onChange={(e) => setProfile({...profile, aboutText: e.target.value})} className="w-full p-3 rounded-xl bg-gray-800 border border-gray-700 text-white outline-none focus:border-[#2563EB] resize-none"></textarea>
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <button type="button" onClick={() => setIsProfileModalOpen(false)} className="w-full sm:w-1/2 bg-gray-700 text-white font-medium py-3 rounded-xl">Cancel</button>
+                <button type="submit" disabled={isSavingProfile} className="w-full sm:w-1/2 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold py-3 rounded-xl disabled:opacity-50">{isSavingProfile ? 'Saving...' : 'Save Profile'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      
+      {/* iPhone Style Toast Notification */}
+      <div className={`fixed top-10 left-1/2 transform -translate-x-1/2 z-[100] transition-all duration-500 ${toast.show ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0 pointer-events-none'}`}>
+        <div className={`flex items-center gap-3 px-6 py-4 rounded-full shadow-2xl backdrop-blur-md font-semibold text-sm tracking-wide border
+          ${toast.type === 'error' ? 'bg-red-500/90 text-white border-red-400' : 'bg-white/95 text-gray-800 border-gray-200'}
+        `}>
+          {toast.type === 'success' ? (
+            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-green-500 text-white shadow-inner">
+              <i className="fas fa-check text-xs"></i>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-red-600 text-white shadow-inner">
+              <i className="fas fa-times text-xs"></i>
+            </div>
+          )}
+          <span>{toast.message}</span>
+        </div>
+      </div>
+
     </div>
   );
 }
