@@ -1,0 +1,23 @@
+{
+  "profile": {
+    "name": "Umesh Thakur",
+    "tagline": "Transforming raw data into intelligent insights using Python, SQL, and AI.",
+    "aboutHeading": "Data Analyst & Tech Enthusiast",
+    "aboutText": "I am a passionate Data Analyst with a strong foundation in Python, SQL, and data visualization tools like Power BI and Tableau. I love turning complex datasets into actionable business insights.",
+    "profileImage": "/Profile Picture.jpeg"
+  },
+  "projects": [],
+  "education": [
+    {
+      "category": "Academic Background",
+      "title": "BCA",
+      "subtitle": "Chandigarh",
+      "year": "2025",
+      "icon": "fas fa-graduation-cap",
+      "_id": "1791035441155"
+    }
+  ],
+  "skills": [],
+  "achievements": [],
+  "resume": []
+}
