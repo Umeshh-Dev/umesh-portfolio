@@ -466,7 +466,7 @@ function App() {
       )}
       
       {/* iPhone Style Toast Notification */}
-      <div className={`fixed top-10 left-1/2 transform -translate-x-1/2 z-[100] transition-all duration-500 ${toast.show ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0 pointer-events-none'}`}>
+      <div className={`fixed bottom-10 left-1/2 transform -translate-x-1/2 z-[100] transition-all duration-500 ${toast.show ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'}`}>
         <div className={`flex items-center gap-3 px-6 py-4 rounded-full shadow-2xl backdrop-blur-md font-semibold text-sm tracking-wide border
           ${toast.type === 'error' ? 'bg-red-500/90 text-white border-red-400' : 'bg-white/95 text-gray-800 border-gray-200'}
         `}>
