@@ -15,15 +15,6 @@
       "_id": "1791040419236"
     }
   ],
-  "achievements": [
-    {
-      "category": "Certification",
-      "title": "Bca",
-      "issuer": "Chandigarh University ",
-      "description": "Bca\n",
-      "icon": "fas fa-award text-yellow-400",
-      "_id": "1791091714801"
-    }
-  ],
+  "achievements": [],
   "resume": []
 }
