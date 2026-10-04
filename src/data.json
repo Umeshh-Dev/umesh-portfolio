@@ -15,6 +15,15 @@
       "_id": "1791040419236"
     }
   ],
-  "achievements": [],
+  "achievements": [
+    {
+      "category": "Certification",
+      "title": "BCA",
+      "issuer": "chandigarh ",
+      "description": "bca\n",
+      "icon": "fas fa-award text-yellow-400",
+      "_id": "1791091498659"
+    }
+  ],
   "resume": []
 }
